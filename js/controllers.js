@@ -67,15 +67,15 @@ app.controller('readchatCtrl', function($scope, List, Mymessage, User) {
   $scope.personalmessages = Mymessage;
   console.log('readchatCtrl working')
   $scope.addMessage = function(message) {
-    console.log('msg:', $scope.$$childHead)
     $scope.personalmessages.$add({
-      To: "you",
+      To: this.message.from,
       from: User,
-      body: $scope.$$childHead.message2
+      body: this.message2
     })
+
+
+    console.log('msg:', this)
     $scope.$$childHead.message2 = ''
-
-
   }
   console.log('List:', $scope.messages)
 })
