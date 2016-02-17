@@ -48,13 +48,25 @@ app.factory('Profile', function($firebaseObject, fbRef) {
     getFullName: function() {
       return this.firstName + " " + this.lastName;
     }
-  });
+  })
   return function(userId) {
     var ref = fbRef.child('profiles').child(userId);
-
     return new User(ref);
   }
 });
+// app.service('chatCtrl', function($scope, $firebase) {
+//   console.log("something worked")
+//   var ref = new Firebase('https://ricksloginapp.firebaseio.com/')
+//   $scope.messages = $firebase(ref)
+//   $scope.addMessage = function(message) {
+//       if (message.keyCode !== 13) return;
+//       $scope.messages.$add({
+//         from: $scope.name,
+//         body: $scope.msg
+//       });
+//       $scope.msg = "";
+//   }
+// });
 //
 // $scope.profile = profile(authData.uid);
 //

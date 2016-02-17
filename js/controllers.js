@@ -15,7 +15,7 @@ app.controller('mainCtrl', function($scope, List, User) {
   };
 });
 
-app.controller('userCtrl', function($scope, $state, Auth) {
+app.controller('userCtrl', function($scope, $state, Auth, $firebase) {
   $scope.state = $state.current.name.split('.')[1];
 
   $scope.submit = function() {
@@ -23,7 +23,7 @@ app.controller('userCtrl', function($scope, $state, Auth) {
     if ($scope.state === 'login') {
       Auth.login($scope.user)
         .then(function() {
-          $state.go('home');
+          $state.go('user.loggedin');
         }, function() {
           $scope.user.password = '';
           alert('d')
@@ -49,7 +49,21 @@ app.controller('userCtrl', function($scope, $state, Auth) {
   };
 });
 
+app.controller('addchatCtrl', function($scope, $firebase, List, User) {
+  $scope.messages = List;
+  $scope.addMessage = function(message) {
 
+    console.log(" $scope.message.msg", $scope.message.msg )
+      if (!$scope.message.msg) return;
+      $scope.messages.$add({
+        from: User,
+        body: $scope.message.msg
+      });
+      console.log('$scope.messages:', $scope.messages)
+      $scope.message.msg = "";
+      console.log('$scope.messages:', $scope.messages)
+  }
+});
 
 
 app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
@@ -64,15 +78,8 @@ app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
   };
 });
 
-app.controller('chatCtrl', function($scope, $firebase) {
-  $scope.messages = $firebase($fbUrl)
-
-  $scope.addMessage = function(message) {
-      if (message.keyCode !== 13) return;
-      $scope.messages.$add({
-        from: $scope.name,
-        body: $scope.msg
-      });
-      $scope.msg = "";
-  }
+app.controller('readchatCtrl', function($scope, List) {
+ console.log('readchatCtrl working')
+  $scope.messages = List;
+  console.log('List:', $scope.messages)
 })

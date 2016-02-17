@@ -10,6 +10,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('user', { url: '/user', template: '<ui-view/>', abstract: true })
     .state('user.login', { url: '/login', templateUrl: '/html/user.html', controller: 'userCtrl' })
     .state('user.register', { url: '/register', templateUrl: '/html/user.html', controller: 'userCtrl' })
+    .state('user.loggedin', { url: '/welcome', templateUrl: '/html/user.html', controller: 'userCtrl' })
+
 
   $urlRouterProvider.otherwise('/');
 });

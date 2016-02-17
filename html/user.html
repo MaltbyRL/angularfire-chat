@@ -1,8 +1,53 @@
 <h1>{{state | titlecase}}</h1>
-<label for="">Email:</label>
-<input type="text" ng-model='user.email'>
-<label for="">Password:</label>
-<input type="password" ng-model='user.password'>
+<label ng-show='state !== "loggedin"' for="">Email:</label>
+<input ng-show='state !== "loggedin"' type="text" ng-model='user.email'>
+<label ng-show='state !== "loggedin"' for="">Password:</label>
+<input ng-show='state !== "loggedin"' type="password" ng-model='user.password'>
 <label ng-show='state === "register"' for="">Password (again):</label>
 <input ng-show='state === "register"' type="password" ng-model='user.password2'>
 <button ng-click='submit()'>{{state | titlecase}}</button>
+
+<div ng-show="state === 'loggedin'">
+  <h1>Logged in Son!!</h1>
+  <div class="container" style="background-image: url('https://images.unsplash.com/photo-1444044205806-38f3ed106c10?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=cc252deaf87959807785d9afa2022b2f'); height: 90vw;">
+    <div ng-controller='addchatCtrl'>
+      <div class="container">
+        <form action="">
+          <input type="text" ng-model="message.msg">
+          <button class="btn btn-primary btn-lg" ng-click="addMessage()">
+            add Message
+          </button>
+        </form>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <td>{{message.name}}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{message.msg}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  <div ng-controller="readchatCtrl">
+    <table>
+      <thead>
+        <tr style="font-weight: bolder; font-size: 16px;">
+          <td style="width: 30vw;">User:</td>
+          <td style="align: center">Comment</td>
+        </tr>
+      </thead>
+      <tbody ng-model="message">
+        <tr ng-repeat="message in messages track by $index">
+          <td>{{message.from.email}}</td>
+          <td>{{message.body}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
