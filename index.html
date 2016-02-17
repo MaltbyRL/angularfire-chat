@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="/bower_components/firebase/firebase.js"></script>
+  <script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
+  <script src="/js/module.js"></script>
+  <script src="/js/controllers.js"></script>
+  <script src="/js/services.js"></script>
+  <title>AngularFire</title>
+</head>
+
+<body ng-app="fireApp" ng-controller='mainCtrl'>
+  <h1>AngularFire</h1>
+  <pre>{{ user || json }}</pre>
+  <div ng-controller="navCtrl">
+    <button ui-sref="home">Home</button>
+    <button ui-sref="user.login">login to this app</button>
+    <button ui-sref="user.register">register to this app</button>
+    <button ng-click="logout()">clicking this button will log you out if you are done with this site :)</button>
+  </div>
+
+  <ui-view></ui-view>
+</body>
+
+</html>
