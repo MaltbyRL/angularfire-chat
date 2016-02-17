@@ -11,6 +11,11 @@ app.factory('List', function(fbRef, $firebaseArray) {
   return $firebaseArray(listRef);
 });
 
+app.factory('Mymessage', function(fbRef, $firebaseArray) {
+  var msgRef = fbRef.child('mymessage');
+  return $firebaseArray(msgRef);
+});
+
 app.factory('User', function(fbRef, $firebaseObject) {
   var userRef = fbRef.child('user');
   return $firebaseObject(userRef);

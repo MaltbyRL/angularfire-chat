@@ -26,7 +26,7 @@ app.controller('userCtrl', function($scope, $state, Auth, $firebase) {
           $state.go('user.loggedin');
         }, function() {
           $scope.user.password = '';
-          alert('d')
+
         })
     } else {
       if ($scope.user.password !== $scope.user.password2) {
@@ -39,7 +39,7 @@ app.controller('userCtrl', function($scope, $state, Auth, $firebase) {
         })
         .then(function(authData) {
           console.log('authData:', authData);
-          $state.go('home');
+          $state.go('user.login');
         })
         .catch(function(err) {
           alert('Glitch in the Matrix')
@@ -52,18 +52,37 @@ app.controller('userCtrl', function($scope, $state, Auth, $firebase) {
 app.controller('addchatCtrl', function($scope, $firebase, List, User) {
   $scope.messages = List;
   $scope.addMessage = function(message) {
-
-    console.log(" $scope.message.msg", $scope.message.msg )
-      if (!$scope.message.msg) return;
+      if (!$scope.message.msg || !User) return;
       $scope.messages.$add({
         from: User,
         body: $scope.message.msg
       });
-      console.log('$scope.messages:', $scope.messages)
       $scope.message.msg = "";
-      console.log('$scope.messages:', $scope.messages)
   }
+
 });
+
+app.controller('readchatCtrl', function($scope, List, Mymessage, User) {
+  $scope.messages = List;
+  $scope.personalmessages = Mymessage;
+  console.log('readchatCtrl working')
+  $scope.addMessage = function(message) {
+    console.log('msg:', $scope.$$childHead)
+    $scope.personalmessages.$add({
+      To: "you",
+      from: User,
+      body: $scope.$$childHead.message2
+    })
+    $scope.$$childHead.message2 = ''
+
+
+  }
+  console.log('List:', $scope.messages)
+})
+
+
+
+
 
 
 app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
@@ -78,8 +97,9 @@ app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
   };
 });
 
-app.controller('readchatCtrl', function($scope, List) {
- console.log('readchatCtrl working')
-  $scope.messages = List;
+
+app.controller('personalchatCtrl', function($scope, Mymessage) {
+  console.log("personalchatCtrl working")
+  $scope.messages = Mymessage;
   console.log('List:', $scope.messages)
 })

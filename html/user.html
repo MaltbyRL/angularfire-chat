@@ -5,49 +5,105 @@
 <input ng-show='state !== "loggedin"' type="password" ng-model='user.password'>
 <label ng-show='state === "register"' for="">Password (again):</label>
 <input ng-show='state === "register"' type="password" ng-model='user.password2'>
-<button ng-click='submit()'>{{state | titlecase}}</button>
+<button class="btn btn-default" ng-click='submit()'>{{state | titlecase}}</button>
 
-<div ng-show="state === 'loggedin'">
-  <h1>Logged in Son!!</h1>
+<div ng-show="state === 'loggedin'" style="background-image: url(''); height: 80vw;">
+  <h1>Logged in I think!</h1>
   <div class="container" style="background-image: url('https://images.unsplash.com/photo-1444044205806-38f3ed106c10?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=cc252deaf87959807785d9afa2022b2f'); height: 90vw;">
-    <div ng-controller='addchatCtrl'>
-      <div class="container">
-        <form action="">
-          <input type="text" ng-model="message.msg">
-          <button class="btn btn-primary btn-lg" ng-click="addMessage()">
-            add Message
-          </button>
-        </form>
+    <div class="row">
+      <div class="col-xs-4">
+        <div ng-controller='addchatCtrl'>
+          <div class="container">
+            <form action="">
+              <input type="text" ng-model="message.msg">
+              <button class="btn btn-primary btn-lg" ng-click="addMessage()">
+                add Message
+              </button>
+            </form>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td>{{message.name}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{message.msg}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <div class="col-xs-4">
+        <br>
+        <br>
+
+        <br>
+        <br>
+      </div>
+      <div class="col-xs-4">
+        <div class="row">
+          <h2>Your messages</h2>
+        </div>
+        <div class="row">
+
+          <div ng-controller="personalchatCtrl">
+            <table>
+              <thead>
+                <tr style="font-weight: bolder; font-size: 16px;">
+                  <td style="width: 7vw;">From:</td>
+                  <td style="width: 15vw;">Comment</td>
+                </tr>
+              </thead>
+              <tbody ng-model="message" style="font-family: helvetica; size: 15px;">
+                <tr ng-repeat="message in messages track by $index">
+                  <td style="color: orange;">{{message.from.email}}</td>
+                  <td style="color: white;">{{message.body}}</td>
+                  <td>
+                    <button class="btn btn-success btn-sm" style="border: 2px solid grey;">Respond</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <h2>The master message form!</h2>
+
+
+
+    <div ng-controller="readchatCtrl">
       <table>
         <thead>
-          <tr>
-            <td>{{message.name}}</td>
+          <tr style="font-weight: bolder; font-size: 16px;">
+            <td style="width: 15vw;">User:</td>
+            <td style="width: 30vw;">Comment</td>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>{{message.msg}}</td>
+        <tbody ng-model="message" style="font-family: helvetica; size: 15px;">
+          <tr ng-repeat="message in messages track by $index">
+            <td style="border: 2px solid grey; color: orange;">{{message.from.email}}</td>
+            <td style="border: 2px solid grey; color: white;">{{message.body}}</td>
+            <td>
+              <button ng-click="personalmessageis = 'true'" class="btn btn-success btn-sm" style="border: 2px solid grey;">Message User</button>
+            </td>
+            <td ng-show="personalmessageis === 'true'">
+              <form action="">
+                <input type="text" ng-model='message2'>
+                <button class="btn btn-primary btn-sm" ng-click="addMessage(message)">
+                  send Message
+                </button>
+            </td>
           </tr>
         </tbody>
       </table>
+
+
+
     </div>
-
-
-  <div ng-controller="readchatCtrl">
-    <table>
-      <thead>
-        <tr style="font-weight: bolder; font-size: 16px;">
-          <td style="width: 30vw;">User:</td>
-          <td style="align: center">Comment</td>
-        </tr>
-      </thead>
-      <tbody ng-model="message">
-        <tr ng-repeat="message in messages track by $index">
-          <td>{{message.from.email}}</td>
-          <td>{{message.body}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
-</div>

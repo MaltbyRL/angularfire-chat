@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+
   <script src='https://code.jquery.com/jquery-2.2.0.min.js'></script>
   <script src="/bower_components/angular/angular.min.js"></script>
   <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -20,9 +21,9 @@
   <!-- <pre>{{ user || json }}</pre> -->
   <div ng-controller="navCtrl">
     <button ng-show='state !== "loggedin"' class="btn btn-default" ui-sref="user.welcome">Home</button>
-    <button ng-show='state !== "loggedin"' class="btn btn-default" ui-sref="user.login">login to this app</button>
-    <button ng-show='state !== "loggedin"' class="btn btn-default" ui-sref="user.register">register to this app</button>
-    <button class="btn btn-default" ng-click="logout()">clicking this button will log you out if you are done with this site :)</button>
+    <button ng-show='state !== "loggedin"' class="btn btn-default" ui-sref="user.login">Login</button>
+    <button ng-show='state !== "loggedin"' class="btn btn-default" ui-sref="user.register">Register</button>
+    <button class="btn btn-default" ng-click="logout()">Log Out</button>
   </div>
 
   <ui-view></ui-view>
