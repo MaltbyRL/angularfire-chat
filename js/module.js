@@ -6,11 +6,11 @@ app.constant('fbUrl', 'https://ricksloginapp.firebaseio.com/');
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('home', { url: '/', templateUrl: '/html/home.html' })
+    .state('home', { url: '/', templateUrl: 'html/home.html' })
     .state('user', { url: '/user', template: '<ui-view/>', abstract: true })
-    .state('user.login', { url: '/login', templateUrl: '/html/user.html', controller: 'userCtrl' })
-    .state('user.register', { url: '/register', templateUrl: '/html/user.html', controller: 'userCtrl' })
-    .state('user.loggedin', { url: '/welcome', templateUrl: '/html/user.html', controller: 'userCtrl' })
+    .state('user.login', { url: '/login', templateUrl: 'html/user.html', controller: 'userCtrl' })
+    .state('user.register', { url: '/register', templateUrl: 'html/user.html', controller: 'userCtrl' })
+    .state('user.loggedin', { url: '/welcome', templateUrl: 'html/user.html', controller: 'userCtrl' })
 
 
   $urlRouterProvider.otherwise('/');
